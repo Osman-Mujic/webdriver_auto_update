@@ -9,7 +9,7 @@ setup(
     description='Checks local ChromeDriver version and automatically download the latest available version online',
     author='Rony Khong',
     author_email='ronykhong77@gmail.com',
-    url='https://github.com/competencytestlvl/webdriver_auto_update',
+    url='https://github.com/Osman-Mujic/webdriver_auto_update/tree/main',
     py_modules=['webdriver_auto_update_2'],
     packages=find_packages(),
     package_dir={'': 'src'},
