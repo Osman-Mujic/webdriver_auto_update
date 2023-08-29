@@ -4,13 +4,13 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setup(
-    name='webdriver_auto_update',
-    version='0.1.0',
+    name='webdriver_auto_update_2',
+    version='0.1.1',
     description='Checks local ChromeDriver version and automatically download the latest available version online',
     author='Rony Khong',
     author_email='ronykhong77@gmail.com',
     url='https://github.com/competencytestlvl/webdriver_auto_update',
-    py_modules=['webdriver_auto_update'],
+    py_modules=['webdriver_auto_update_2'],
     packages=find_packages(),
     package_dir={'': 'src'},
     python_requires='>=3.9',

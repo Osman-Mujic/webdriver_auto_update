@@ -1,3 +1,4 @@
+import json
 import os
 import platform
 import requests
@@ -18,8 +19,8 @@ def download_latest_version(version_number, driver_directory):
 
     Returns:
         None
-    """ 
-    download_url = "https://chromedriver.storage.googleapis.com/" + version_number + "/chromedriver_" + obtain_os() + ".zip"
+    """
+    download_url = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/" + version_number + "/" + obtain_os() + "/chromedriver-" + obtain_os() + ".zip"
     print("Attempting to download latest available driver ......")
     print(download_url)
     # Download driver as a zip file to specified folder
@@ -44,7 +45,7 @@ def check_driver(driver_directory):
     Returns:
         bool: True if chromedriver executable is already in driver_directory, else it is automatically downloaded.
     """
-    # Strip '/' and '\' 
+    # Strip '/' and '\'
     if (driver_directory[0] == '/' or driver_directory[0] == '\\'):
         driver_directory = driver_directory[1:]
     # Creating the Directory if it doesn't exits
@@ -60,8 +61,8 @@ def check_driver(driver_directory):
                                  capture_output=True,
                                  text=True)
         # Extract local driver version number as string from terminal output
-        local_driver_version = cmd_run.stdout.split()[1]   
-        os.chdir(base_directory)  
+        local_driver_version = cmd_run.stdout.split()[1]
+        os.chdir(base_directory)
     except (FileNotFoundError, IndexError):
         print("No chromedriver executable found in specified path\n")
         download_latest_version(online_driver_version, driver_directory)
@@ -75,21 +76,29 @@ def check_driver(driver_directory):
 
 
 def get_latest_chromedriver_release():
-    """ 
+    """
     Check for latest chromedriver release version online.
 
     Returns:
-        str: Latest chromedriver version available for download.
+        tuple: Latest chromedriver version available for download and the operating system identifier.
     """
-    latest_release_url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
+    latest_release_url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json"
     response = requests.get(latest_release_url)
-    return response.text.strip()
 
-            
+    if response.status_code == 200:
+        data = json.loads(response.text)
+        stable_version = data["channels"]["Stable"]["version"]
+        print("Latest version in Stable channel:", stable_version)
+        return stable_version
+    else:
+        print("Failed to fetch data:", response.status_code)
+        return None
+
+
 def obtain_os():
     """
     Obtain operating system based on chromedriver supported by https://chromedriver.chromium.org/
-    
+
     Returns:
         str: Operating system identifier string.
     """
