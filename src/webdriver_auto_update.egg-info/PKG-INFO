@@ -23,7 +23,7 @@ Description: # webdriver_auto_update
         - Run the following to install:
         
         ``` 
-        pip install webdriver-auto-update
+        pip install webdriver-auto-update-2
         ```
         
         ## Example
