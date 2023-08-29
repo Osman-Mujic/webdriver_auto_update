@@ -15,7 +15,7 @@ A program to check existing local chromedriver version and automatically downloa
 - Run the following to install:
 
 ``` 
-pip install webdriver-auto-update
+pip install webdriver-auto-update-2
 ```
 
 ## Example
